@@ -11,7 +11,7 @@ services:
       MYSQL_PASSWORD: 123456
       MYSQL_DATABASE: banco
     ports:
-      - "5001:5001"
+      - "5001:3306"
     volumes:
       - mysql_data:/var/lib/mysql
 

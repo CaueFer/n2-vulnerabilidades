@@ -18,6 +18,7 @@ authRoutes.post("/login", loginUserController);
 authRoutes.post("/signup", signupUserController);
 
 authRoutes.put("/user", updateUserController);
+
 authRoutes.delete("/user", deleteUserController);
 
 export default authRoutes;
