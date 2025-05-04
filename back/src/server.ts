@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://127.0.0.1:5500"], // coloca o endpoint certo do front
+    origin: ["http://localhost:5173", "http://localhost:5500"], // coloca o endpoint certo do front
     credentials: true, // pra receber/enviar os cookies
   })
 );
