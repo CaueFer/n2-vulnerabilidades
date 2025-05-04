@@ -1,3 +1,11 @@
+# Endpoints da API
+
+## Postman
+
+https://www.postman.com/payload-astronaut-55560118/neandertais/collection/37fuatq/vulnerabilidades?share=true
+
+
+--- 
 # COMO RODAR AS VULNERABILIDADES
 
 ## SQL Injection 
