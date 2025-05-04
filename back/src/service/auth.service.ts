@@ -1,4 +1,5 @@
 import { RowDataPacket } from "mysql2";
+
 import {
   deleteUserDb,
   getUserDb,
@@ -6,8 +7,8 @@ import {
   loginUserDb,
   signupUserDb,
   updateUserDb,
+  updateUserPasswordDb,
 } from "../db/auth.db";
-import { Usuario } from "../type";
 
 export async function getUserService(id: number): Promise<unknown> {
   const query = await getUserDb(id);
@@ -51,10 +52,20 @@ export async function signupUserService(
 export async function updateUserService(
   id: number,
   nome: string,
-  email: string,
-  senha: string
+  email: string
 ): Promise<unknown> {
-  const query = await updateUserDb(id, nome, email, senha);
+  const query = await updateUserDb(id, nome, email);
+
+  const [rows] = query;
+
+  return rows[0];
+}
+
+export async function updateUserPasswordService(
+  usuario: any,
+  novaSenha: string
+): Promise<unknown> {
+  const query = await updateUserPasswordDb(usuario.id, novaSenha);
 
   const [rows] = query;
 

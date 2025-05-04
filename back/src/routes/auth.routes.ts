@@ -7,6 +7,7 @@ import {
   loginUserController,
   signupUserController,
   updateUserController,
+  updateUserPasswordController,
 } from "../controller/auth.controller";
 
 const authRoutes = Router();
@@ -18,6 +19,7 @@ authRoutes.post("/login", loginUserController);
 authRoutes.post("/signup", signupUserController);
 
 authRoutes.put("/user", updateUserController);
+authRoutes.put("/userPassword", updateUserPasswordController);
 
 authRoutes.delete("/user", deleteUserController);
 

@@ -39,6 +39,7 @@ export async function loginUserDb(
   const query = await pool.query(
     `
     SELECT
+      id,
       nome,
       email
     from usuario
@@ -75,20 +76,44 @@ export async function signupUserDb(
 export async function updateUserDb(
   id: number,
   nome: string,
-  email: string,
-  senha: string
+  email: string
 ): Promise<[RowDataPacket[], FieldPacket[]]> {
   const query1 = await pool.query(
     ` 
     UPDATE usuario 
-    SET nome = "${nome}", email = "${email}", senha = "${senha}"
+    SET nome = "${nome}", email = "${email}"
     where id = ${id};
     `
   );
 
   const query2 = await pool.query(
     ` 
-    SELECT nome, email FROM usuario  where id = ${id};
+    SELECT id, nome, email 
+    FROM usuario
+    where id = ${id};
+    `
+  );
+
+  return query2 as [RowDataPacket[], FieldPacket[]];
+}
+
+export async function updateUserPasswordDb(
+  id: number,
+  novaSenha: string
+): Promise<[RowDataPacket[], FieldPacket[]]> {
+  const query = await pool.query(
+    ` 
+    UPDATE usuario
+    SET senha = "${novaSenha}"
+    where id = "${id}"
+    `
+  );
+
+  const query2 = await pool.query(
+    ` 
+    SELECT id, nome, email 
+    FROM usuario
+    where id = ${id};
     `
   );
 
