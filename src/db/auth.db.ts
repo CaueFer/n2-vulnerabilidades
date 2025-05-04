@@ -10,10 +10,12 @@ export async function getUserDb(
     SELECT
       nome,
       email
-    FROM user
-    WHERE id = ${id}
+    FROM usuario
+    WHERE id = ?
     `,
-    [id]
+    [
+      id
+    ]
   );
 
   return query;
@@ -25,7 +27,7 @@ export async function getUsersDb(): Promise<[QueryResult, FieldPacket[]]> {
     SELECT
       nome,
       email
-    FROM user
+    FROM usuario
     `
   );
 
@@ -41,11 +43,15 @@ export async function loginUserDb(
     SELECT
       nome,
       email
-    from user
+    from usuario
     where 1 = 1
-    and email = ${email}
-    and senha = ${senha}
-    `
+    and email = ?
+    and senha = ?
+    `,
+    [
+      email,
+      senha
+    ]
   );
 
   return query;
@@ -58,9 +64,14 @@ export async function signupUserDb(
 ): Promise<[QueryResult, FieldPacket[]]> {
   const query = await pool.query(
     ` 
-    INSERT INTO user (nome, email, senha)
-    VALUES (${nome}, ${email}, ${senha})
-    `
+    INSERT INTO usuario (nome, email, senha)
+    VALUES (?, ?, ?)
+    `,
+    [
+      nome,
+        email,
+          senha
+    ]
   );
 
   return query;
@@ -74,10 +85,16 @@ export async function updateUserDb(
 ): Promise<[QueryResult, FieldPacket[]]> {
   const query = await pool.query(
     ` 
-    UPDATE user 
-    SET nome = ${nome}, email = ${email}, senha = ${senha}
-    where id = ${id}
-    `
+    UPDATE usuario 
+    SET nome = ?, email = ?, senha = ?
+    where id = ?
+    `,
+    [
+      nome,
+        email,
+          senha,  
+            id
+    ]
   );
 
   return query;
@@ -88,8 +105,11 @@ export async function deleteUserDb(
 ): Promise<[QueryResult, FieldPacket[]]> {
   const query = await pool.query(
     ` 
-    DELETE from user where id = ${id}
-    `
+    DELETE from usuario where id = ?
+    `,
+    [
+      id
+    ]
   );
 
   return query;

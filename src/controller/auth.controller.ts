@@ -120,3 +120,4 @@ export async function deleteUserController(
 ): Promise<void> {
   // delete no banco
 }
+
