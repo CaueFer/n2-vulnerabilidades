@@ -1,10 +1,10 @@
-import { FieldPacket, QueryResult } from "mysql2";
+import { FieldPacket, QueryResult, RowDataPacket } from "mysql2";
 
 import pool from "../db";
 
 export async function getUserDb(
   id: number
-): Promise<[QueryResult, FieldPacket[]]> {
+): Promise<[RowDataPacket[], FieldPacket[]]> {
   const query = await pool.query(
     `
     SELECT
@@ -18,10 +18,10 @@ export async function getUserDb(
     ]
   );
 
-  return query;
+  return query as [RowDataPacket[], FieldPacket[]];
 }
 
-export async function getUsersDb(): Promise<[QueryResult, FieldPacket[]]> {
+export async function getUsersDb(): Promise<[RowDataPacket[], FieldPacket[]]> {
   const query = await pool.query(
     `
     SELECT
@@ -31,13 +31,13 @@ export async function getUsersDb(): Promise<[QueryResult, FieldPacket[]]> {
     `
   );
 
-  return query;
+  return query as [RowDataPacket[], FieldPacket[]];
 }
 
 export async function loginUserDb(
   email: string,
   senha: string
-): Promise<[QueryResult, FieldPacket[]]> {
+): Promise<[RowDataPacket[], FieldPacket[]]> {
   const query = await pool.query(
     `
     SELECT
@@ -54,15 +54,15 @@ export async function loginUserDb(
     ]
   );
 
-  return query;
+  return query as [RowDataPacket[], FieldPacket[]];
 }
 
 export async function signupUserDb(
   nome: string,
   email: string,
   senha: string
-): Promise<[QueryResult, FieldPacket[]]> {
-  const query = await pool.query(
+): Promise<[RowDataPacket[], FieldPacket[]]> {
+  const query1 = await pool.query(
     ` 
     INSERT INTO usuario (nome, email, senha)
     VALUES (?, ?, ?)
@@ -74,7 +74,13 @@ export async function signupUserDb(
     ]
   );
 
-  return query;
+  const query2 = await pool.query(
+    ` 
+    SELECT nome, email FROM usuario WHERE email = '${email}';
+    `
+  );
+
+  return query2 as [RowDataPacket[], FieldPacket[]];
 }
 
 export async function updateUserDb(
@@ -82,8 +88,8 @@ export async function updateUserDb(
   nome: string,
   email: string,
   senha: string
-): Promise<[QueryResult, FieldPacket[]]> {
-  const query = await pool.query(
+): Promise<[RowDataPacket[], FieldPacket[]]> {
+  const query1 = await pool.query(
     ` 
     UPDATE usuario 
     SET nome = ?, email = ?, senha = ?
@@ -97,12 +103,18 @@ export async function updateUserDb(
     ]
   );
 
-  return query;
+  const query2 = await pool.query(
+    ` 
+    SELECT nome, email FROM usuario  where id = ${id};
+    `
+  );
+
+  return query2 as [RowDataPacket[], FieldPacket[]];
 }
 
 export async function deleteUserDb(
   id: number
-): Promise<[QueryResult, FieldPacket[]]> {
+): Promise<[RowDataPacket[], FieldPacket[]]> {
   const query = await pool.query(
     ` 
     DELETE from usuario where id = ?
@@ -112,5 +124,5 @@ export async function deleteUserDb(
     ]
   );
 
-  return query;
+  return query as [RowDataPacket[], FieldPacket[]];
 }

@@ -6,6 +6,8 @@ const sqlPool = mysql.createPool({
   user: "root",
   password: "1234",
   database: "n2seguranca",
+  ssl: { rejectUnauthorized: false },
+  connectionLimit: 10,
 });
 
 const pool = sqlPool.promise();
