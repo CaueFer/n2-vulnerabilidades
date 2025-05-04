@@ -39,7 +39,7 @@ Exemplo do script do atacante:
             if (data.success) {
               console.log({ data });
 
-              alert("Senha alterada, faca login novamente!");
+              alert("Senha alterada!");
             }
           })
           .catch((error) => {
