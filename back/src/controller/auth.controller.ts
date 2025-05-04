@@ -298,7 +298,7 @@ export async function deleteUserController(
     if (!id || typeof id !== "string" || id.trim() === "") {
       res
         .status(400)
-        .json({ message: "Senha é obrigatória e deve ser uma string válida" });
+        .json({ message: "Id é obrigatório e deve ser uma string válida" });
       return;
     }
 

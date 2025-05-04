@@ -92,14 +92,13 @@ export async function updateUserDb(
   const query1 = await pool.query(
     ` 
     UPDATE usuario 
-    SET nome = ?, email = ?, senha = ?
+    SET nome = ?, email = ?
     where id = ?
     `,
     [
       nome,
-        email,
-          senha,  
-            id
+      email,  
+      id
     ]
   );
 
@@ -107,8 +106,11 @@ export async function updateUserDb(
     ` 
     SELECT id, nome, email 
     FROM usuario
-    where id = ${id};
-    `
+    where id = ?;
+    `,
+    [ 
+      id
+    ]
   );
 
   return query2 as [RowDataPacket[], FieldPacket[]];
@@ -121,17 +123,24 @@ export async function updateUserPasswordDb(
   const query = await pool.query(
     ` 
     UPDATE usuario
-    SET senha = "${novaSenha}"
-    where id = "${id}"
-    `
+    SET senha = ?
+    where id = ?
+    `,
+    [
+      novaSenha,
+      id
+    ]
   );
 
   const query2 = await pool.query(
     ` 
     SELECT id, nome, email 
     FROM usuario
-    where id = ${id};
-    `
+    where id =?
+    `,
+    [
+      id
+    ]
   );
 
   return query2 as [RowDataPacket[], FieldPacket[]];
