@@ -98,6 +98,7 @@ export async function loginUserController(
     res.cookie("usuario", user, {
       httpOnly: true,
       sameSite: "lax",
+      secure: false,
     });
     res.status(200).json({ usuario: user });
   } catch (error) {
@@ -238,6 +239,7 @@ export async function updateUserPasswordController(
 ): Promise<void> {
   try {
     const usuario = req.cookies["usuario"];
+    console.log("User cookie", usuario);
 
     if (!usuario) {
       res.status(404).json({ message: "Usuário não encontrado." });

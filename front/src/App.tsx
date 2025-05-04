@@ -162,7 +162,7 @@ function App() {
             <div>
               <label className="block text-sm font-medium ">Email</label>
               <input
-                type="email"
+                type="text"
                 name="email"
                 className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
                 value={email}
@@ -233,7 +233,7 @@ function App() {
                 E-mail:
               </label>
               <input
-                type="email"
+                type="text"
                 id="email"
                 name="email"
                 required
