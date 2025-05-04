@@ -1,5 +1,30 @@
 # COMO RODAR AS VULNERABILIDADES
 
+## SQL Injection 
+
+1 - Quando digitamos `" OR "1"="1` no campo de e-mail  conseguimos fazer login mesmo sem credenciais corretas
+
+https://github.com/user-attachments/assets/67b0d9d1-da18-4db9-ab24-6decab26bb59
+
+
+2 - Essa falha acontece quando os dados fornecidos pelo usuário são inseridos diretamente dentro de um comando SQL, sem qualquer tipo de proteção ou tratamento. Nesse caso, o conteúdo malicioso enviado é interpretado como parte da lógica do banco de dados.
+
+Exemplo de vulnerabilidade no código  👇 
+
+```js
+  const query = await pool.query(
+    `
+    SELECT
+      id,
+      nome,
+      email
+    from usuario
+    where 1 = 1
+    and email = "${email}" // obs: O campo email está vulnerável para SQL Injections:
+    and senha = "${senha}"
+    `
+  );
+```
 
 ## Cross-Site Request Forgery (CSRF)
 
