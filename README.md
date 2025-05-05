@@ -1,5 +1,7 @@
 # Projeto de APIs - Segurança em APIs REST
 
+Grupo: Caue Fernandes, Walter Theodoro e Luiz Passos.
+
 Este repositório contém duas implementações de uma API com foco em segurança:
 
 - Uma versão **vulnerável**, demonstrando más práticas.
