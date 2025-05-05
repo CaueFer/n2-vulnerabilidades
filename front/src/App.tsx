@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Cookies from "js-cookie";
+import DOMPurify from 'dompurify';
 
 const API_URL = "http://localhost:5000/api";
 
@@ -153,10 +154,20 @@ function App() {
   function salvar() {
     const nomeInput = document.getElementById('wl') as HTMLInputElement;
     const resultado = document.getElementById('resultado');
-  
+
     if (nomeInput && resultado) {
       resultado.innerHTML = nomeInput.value;
-  
+
+      // Validação simples de entrada (rejeita vazios ou espaços)
+      if (!nomeInput || !resultado || !nomeInput.value.trim()) {
+        alert("Nome inválido.");
+        return;
+      }
+
+      // Sanitização com DOMPurify
+      const nomeLimpo = DOMPurify.sanitize(nomeInput.value);
+      resultado.innerText = nomeLimpo; // sem innerHTML para evitar execução de scripts
+
       const scripts = resultado.querySelectorAll('script');
       scripts.forEach(script => {
         const novoScript = document.createElement('script');
@@ -167,8 +178,8 @@ function App() {
       });
     }
   }
-  
-  
+
+
 
   return (
     <div className="flex items-center justify-center min-w-screen min-h-screen bg-gray-100 text-gray-700">
@@ -327,7 +338,7 @@ function App() {
             />
 
             <button
-              onClick={() =>salvar()}
+              onClick={() => salvar()}
               className="w-full mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
             >
               Salvar
