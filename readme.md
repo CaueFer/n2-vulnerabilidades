@@ -34,6 +34,36 @@ Exemplo de vulnerabilidade no código  👇
   );
 ```
 
+## XXS (Cross-site scripting)
+
+1 - XSS é uma vulnerabilidade que permite a um atacante injetar scripts maliciosos (JavaScript) em páginas web visualizadas por outros usuários.  
+Exemplo de código que injeta script
+```js
+ const salvar = () => {
+    const nomeInput = document.getElementById('wl') as HTMLInputElement;
+    const resultado = document.getElementById('resultado');
+
+    if (nomeInput && resultado) {
+      resultado.innerHTML = nomeInput.value;
+
+      const scripts = resultado.querySelectorAll('script');
+
+      scripts.forEach(script => {
+        const novoScript = document.createElement('script');
+        if (script.innerText) {
+          // insere o script dentro do html
+          novoScript.innerText = script.innerText;
+          document.body.appendChild(novoScript);
+        }
+      });
+    }
+  }
+```
+2 - Esse código, quando inserido em um campo de entrada (formulário) e exibido no HTML sem tratamento, executará um alerta, isso indica vulnerabilidade XSS.
+```js
+<script>alert('XSS')</script>
+```
+
 ## Cross-Site Request Forgery (CSRF)
 
 1 - Necessário fazer login da pagina original
