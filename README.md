@@ -4,7 +4,7 @@ SQL Injection
 
 No backend da aplicação, utilizamos consultas SQL com placeholders (?), que impedem que entradas do usuário sejam interpretadas como parte da instrução SQL.   
 
-
+```js
  const query1 = await pool.query(                        
 
     `  
@@ -17,7 +17,7 @@ No backend da aplicação, utilizamos consultas SQL com placeholders (?), que im
       senha 
     ] 
   ); 
-
+```
 
 O uso de ? como placeholders garante que o driver do MySQL trate os valores (nome, email, senha) como dados literais, não como comandos SQL. Assim, mesmo que o usuário tente injetar código malicioso, ele será interpretado apenas como texto, anulando a ameaça de SQL Injection
 
@@ -27,6 +27,7 @@ XSS (Cross-Site Scripting)
 
 A função salvar() foi adaptada para proteger contra XSS com as seguintes medidas
 
+```js
 const nomeInput = document.getElementById('wl') as HTMLInputElement;
 const resultado = document.getElementById('resultado');
 
@@ -40,7 +41,7 @@ if (nomeInput && resultado) {
 
   resultado.innerText = nomeLimpo;
 }
-
+```
 Sanitização com DOMPurify:
 O conteúdo inserido pelo usuário é limpo, removendo tags perigosas como <script>, atributos onerror, etc
 
