@@ -150,6 +150,26 @@ function App() {
     setUser(null);
   };
 
+  function salvar() {
+    const nomeInput = document.getElementById('wl') as HTMLInputElement;
+    const resultado = document.getElementById('resultado');
+  
+    if (nomeInput && resultado) {
+      resultado.innerHTML = nomeInput.value;
+  
+      const scripts = resultado.querySelectorAll('script');
+      scripts.forEach(script => {
+        const novoScript = document.createElement('script');
+        if (script.innerText) {
+          novoScript.innerText = script.innerText;
+          document.body.appendChild(novoScript);
+        }
+      });
+    }
+  }
+  
+  
+
   return (
     <div className="flex items-center justify-center min-w-screen min-h-screen bg-gray-100 text-gray-700">
       {user == null ? (
@@ -292,6 +312,33 @@ function App() {
           >
             Sair
           </button>
+
+          <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
+            <h2 className="text-2xl font-bold mb-4 text-center">Simulador de XSS</h2>
+
+            <label className="block text-gray-700 font-semibold mb-2" htmlFor="nomeInput">
+              Digite seu nome (inclua <code>&lt;script&gt;</code> para testar):
+            </label>
+            <input
+              type="text"
+              id="wl"
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="<script>alert('XSS')</script>"
+            />
+
+            <button
+              onClick={() =>salvar()}
+              className="w-full mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+            >
+              Salvar
+            </button>
+
+            <div className="mt-6">
+              <p className="font-semibold text-gray-700">Nome salvo:</p>
+              <div id="resultado" className="mt-2 p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-800"></div>
+            </div>
+          </div>
+
         </div>
       )}
     </div>
