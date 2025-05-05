@@ -45,7 +45,10 @@ Este projeto foi criado como parte da disciplina de Segurança da Informação p
    ```
 
 ---
-Relatório – Sumário Executivo
+
+
+- Relatório – Sumário Executivo
+
 Projeto: Comparação de APIs Segura e Insegura
 Disciplina: Segurança da Informação
 Objetivo: Demonstrar, de forma prática e educativa, a diferença entre más práticas (API vulnerável) e boas práticas (API segura) no desenvolvimento de APIs.
@@ -69,7 +72,10 @@ Aplicação de conhecimento teórico em um ambiente prático e controlado.
 Público-Alvo:
 Estudantes e profissionais da área de desenvolvimento e segurança da informação.
 
-Relatório Técnico
+
+
+- Relatório Técnico
+  
 1. Introdução
 Este repositório contém duas versões de uma API REST desenvolvida com o objetivo de comparar práticas inseguras e seguras. O projeto é utilizado para fins educacionais na disciplina de Segurança da Informação.
 
