@@ -97,8 +97,8 @@ export async function loginUserController(
 
     res.cookie("usuario", user, {
       httpOnly: true,
-      sameSite: "lax",
-      secure: false,
+      sameSite: "strict", // strict para proteger
+      secure: true, // para usar o HTTPs
     });
     res.status(200).json({ usuario: user });
   } catch (error) {
@@ -312,4 +312,3 @@ export async function deleteUserController(
     res.status(500).json({ message: "Erro interno do servidor" });
   }
 }
-
