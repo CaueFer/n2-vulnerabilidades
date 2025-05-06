@@ -49,74 +49,76 @@ Este projeto foi criado como parte da disciplina de Segurança da Informação p
 ---
 
 
-- Relatório – Sumário Executivo
+## 📘 Sumário Executivo
 
-Projeto: Comparação de APIs Segura e Insegura
-Disciplina: Segurança da Informação
-Objetivo: Demonstrar, de forma prática e educativa, a diferença entre más práticas (API vulnerável) e boas práticas (API segura) no desenvolvimento de APIs.
-Repositório: Contém duas branches:
+**Projeto:** Comparação de APIs Segura e Insegura  
+**Disciplina:** Segurança da Informação  
+**Objetivo:** Demonstrar, de forma prática e educativa, como vulnerabilidades como **SQL Injection**, **XSS** e **CSRF** podem afetar APIs REST e como preveni-las com boas práticas de desenvolvimento.
 
-🔓 caue-api-vulneravel
+### 🔗 Repositório
+O projeto contém duas branches principais:
+- 🔓 `caue-api-vulneravel`: Implementação com falhas intencionais
+- 🛡️ `walter-api-invulneravel`: Implementação segura e protegida
 
-🛡️ walter-api-invulneravel
+### 🎯 Contexto
+O projeto visa simular ambientes reais onde falhas de segurança são exploradas por atacantes. A proposta é evidenciar os riscos práticos e como medidas simples de segurança já reduzem drasticamente as ameaças.
 
-Contexto:
-O projeto visa evidenciar como falhas comuns no desenvolvimento de APIs podem comprometer a segurança de aplicações web. Ao oferecer duas implementações distintas, o estudo permite analisar os impactos de práticas inseguras e os benefícios da aplicação de medidas corretas de segurança.
+### ✅ Resultados Esperados
+- Entendimento aprofundado das vulnerabilidades: **SQL Injection**, **XSS**, **CSRF**
+- Aplicação de contramedidas práticas: **validação**, **sanitização**, **tokens de segurança**
+- Estímulo à cultura de desenvolvimento seguro desde as fases iniciais de um projeto
 
-Resultados Esperados:
+### 👥 Público-Alvo
+Estudantes de Engenharia de Software, profissionais iniciantes em back-end, e equipes interessadas em segurança de APIs web.
 
-Compreensão das principais vulnerabilidades em APIs REST.
+---
 
-Demonstração da importância de aplicar práticas como autenticação segura, validação de dados, proteção contra injeções, entre outras.
+## ⚙️ Relatório Técnico
 
-Aplicação de conhecimento teórico em um ambiente prático e controlado.
+### 1. 📥 Introdução
+Este repositório serve como material didático para comparação entre práticas inseguras e seguras na construção de APIs REST. As vulnerabilidades analisadas representam falhas comuns em APIs reais.
 
-Público-Alvo:
-Estudantes e profissionais da área de desenvolvimento e segurança da informação.
+---
+
+### 2. 🗂️ Estrutura do Repositório
+
+- **`caue-api-vulneravel`**: Contém falhas intencionais para simular ataques reais.
+- **`walter-api-invulneravel`**: Contém boas práticas de segurança com foco em SQL Injection, XSS e CSRF.
+
+---
+
+### 3. 🛠️ Tecnologias Utilizadas
+
+- **Backend:** Node.js + Express  
+- **Banco de Dados:** MySQL  
+- **Autenticação:** JWT  
+
+---
+
+### 4. 🚨 Vulnerabilidades na API Insegura
+
+| Tipo de Vulnerabilidade | Descrição |
+|-------------------------|-----------|
+| **SQL Injection** | Uso de strings concatenadas diretamente nas queries SQL, permitindo execução de comandos maliciosos. |
+| **XSS (Cross-Site Scripting)** | Dados do usuário são retornados sem sanitização, permitindo injeção de scripts no lado do cliente. |
+| **CSRF (Cross-Site Request Forgery)** | Ausência de tokens CSRF e cookies sem `SameSite`, permitindo requisições forjadas de outros sites. |
+
+---
+
+### 5. 🛡️ Medidas de Segurança na API Protegida
+
+| Prática de Segurança | Implementação |
+|----------------------|---------------|
+| **Prevenção de SQLi** | Uso de consultas parametrizadas (`?`). |
+| **Proteção contra XSS** | Sanitização de inputs e outputs com bibliotecas como `xss`. |
+| **Proteção contra CSRF** | Middleware `csurf` + cookies com flags `SameSite=Strict`, `HttpOnly`, `Secure`. |
+| **Headers de Segurança** | Adicionado Token CSRF. |
+
+---
+
+### 6. 🧠 Conclusão
+A comparação entre versões inseguras e seguras permitiu identificar vulnerabilidades comuns e entender como elas podem ser evitadas com práticas recomendadas. A versão segura demonstra que segurança **não é luxo, é padrão mínimo de qualidade** em qualquer aplicação moderna.
+
+---
 
 
-
-- Relatório Técnico
-  
-1. Introdução
-Este repositório contém duas versões de uma API REST desenvolvida com o objetivo de comparar práticas inseguras e seguras. O projeto é utilizado para fins educacionais na disciplina de Segurança da Informação.
-
-2. Estrutura do Repositório
-
-Branch caue-api-vulneravel:
-Contém a implementação insegura da API, com falhas propositalmente incluídas.
-
-Branch walter-api-invulneravel:
-Contém a versão segura da mesma API, corrigindo as vulnerabilidades identificadas.
-
-3. Tecnologias Utilizadas
-
-Node.js + Express
-
-Banco de Dados: MySQL
-
-Autenticação: JWT
-
-ORM: Sequelize (em ambas versões)
-
-4. Principais Vulnerabilidades Presentes na API Vulnerável
-
-Tipo de Vulnerabilidade	Descrição
-Injeção SQL	Falta de uso de parâmetros no acesso ao banco.
-Autenticação Fraca	Tokens mal gerenciados e ausência de verificação adequada.
-Exposição de Informações Sensíveis	Respostas contendo dados sensíveis como senhas.
-Falta de Validação de Entrada	Dados de entrada do usuário não são validados.
-CORS Mal Configurado	Permite requisições de origens não confiáveis.
-
-5. Medidas de Segurança Aplicadas na API Invulnerável
-
-Prática de Segurança	Implementação
-Validação de Dados	Middleware usando bibliotecas como Joi ou express-validator.
-Uso Correto do ORM	Consultas parametrizadas para evitar injeção.
-Autenticação JWT Segura	Tokens com tempo de expiração e armazenamento seguro.
-Hash de Senhas	Utilização de bcrypt para armazenamento seguro.
-Headers de Segurança	Uso do Helmet para proteção básica.
-Rate Limiting	Limitação de requisições para evitar ataques de força bruta.
-
-6. Conclusão
-A comparação prática entre as versões permitiu a identificação clara de falhas comuns em APIs e como solucioná-las com boas práticas. A versão segura serve como base de referência para futuros projetos que exijam segurança no desenvolvimento de sistemas web.
