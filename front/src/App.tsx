@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Cookies from "js-cookie";
-import DOMPurify from 'dompurify';
+import DOMPurify from "dompurify";
 
 const API_URL = "http://localhost:5000/api";
 
@@ -46,12 +46,15 @@ function App() {
         return res.json();
       })
       .then((data) => {
-        if (data.usuario) {
-          setUser(data.usuario);
-          setNovoEmail(data?.usuario?.email);
-          setNovoNome(data?.usuario?.nome);
+        const { user, token } = data;
+        if (user && token) {
+          setUser(user);
+          setNovoEmail(user?.email);
+          setNovoNome(user?.nome);
 
-          console.log("Usuario logado", data.usuario);
+          Cookies.set("token", token);
+
+          console.log("Usuario logado", user);
 
           setError(null);
         }
@@ -152,8 +155,8 @@ function App() {
   };
 
   function salvar() {
-    const nomeInput = document.getElementById('wl') as HTMLInputElement;
-    const resultado = document.getElementById('resultado');
+    const nomeInput = document.getElementById("wl") as HTMLInputElement;
+    const resultado = document.getElementById("resultado");
 
     if (nomeInput && resultado) {
       resultado.innerHTML = nomeInput.value;
@@ -168,9 +171,9 @@ function App() {
       const nomeLimpo = DOMPurify.sanitize(nomeInput.value);
       resultado.innerText = nomeLimpo; // sem innerHTML para evitar execução de scripts
 
-      const scripts = resultado.querySelectorAll('script');
-      scripts.forEach(script => {
-        const novoScript = document.createElement('script');
+      const scripts = resultado.querySelectorAll("script");
+      scripts.forEach((script) => {
+        const novoScript = document.createElement("script");
         if (script.innerText) {
           novoScript.innerText = script.innerText;
           document.body.appendChild(novoScript);
@@ -178,8 +181,6 @@ function App() {
       });
     }
   }
-
-
 
   return (
     <div className="flex items-center justify-center min-w-screen min-h-screen bg-gray-100 text-gray-700">
@@ -325,9 +326,14 @@ function App() {
           </button>
 
           <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
-            <h2 className="text-2xl font-bold mb-4 text-center">Simulador de XSS</h2>
+            <h2 className="text-2xl font-bold mb-4 text-center">
+              Simulador de XSS
+            </h2>
 
-            <label className="block text-gray-700 font-semibold mb-2" htmlFor="nomeInput">
+            <label
+              className="block text-gray-700 font-semibold mb-2"
+              htmlFor="nomeInput"
+            >
               Digite seu nome (inclua <code>&lt;script&gt;</code> para testar):
             </label>
             <input
@@ -346,10 +352,12 @@ function App() {
 
             <div className="mt-6">
               <p className="font-semibold text-gray-700">Nome salvo:</p>
-              <div id="resultado" className="mt-2 p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-800"></div>
+              <div
+                id="resultado"
+                className="mt-2 p-2 bg-gray-100 border border-gray-300 rounded-md text-gray-800"
+              ></div>
             </div>
           </div>
-
         </div>
       )}
     </div>
