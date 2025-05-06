@@ -9,13 +9,13 @@ Este repositório contém duas implementações de uma API com foco em seguranç
 
 ## Branches
 
-🔓 **API Vulnerável**  
+**API Vulnerável**  
 Implementação com falhas de segurança propositalmente incluídas.
-👉   [caue-api-vulneravel](https://github.com/CaueFer/n2-vulnerabilidades/tree/caue-api-vulneravel)
+[caue-api-vulneravel](https://github.com/CaueFer/n2-vulnerabilidades/tree/caue-api-vulneravel)
 
-🛡️ **API Invulnerável**  
+ **API Invulnerável**  
 Implementação com medidas de segurança aplicadas corretamente.
-👉   [walter-api-invulnerável](https://github.com/CaueFer/n2-vulnerabilidades/tree/walter-api-invulnerável)
+[walter-api-invulnerável](https://github.com/CaueFer/n2-vulnerabilidades/tree/walter-api-invulnerável)
 
 ---
 
@@ -49,45 +49,45 @@ Este projeto foi criado como parte da disciplina de Segurança da Informação p
 ---
 
 
-## 📘 Sumário Executivo
+##  Sumário Executivo
 
 **Projeto:** Comparação de APIs Segura e Insegura  
 **Disciplina:** Segurança da Informação  
 **Objetivo:** Demonstrar, de forma prática e educativa, como vulnerabilidades como **SQL Injection**, **XSS** e **CSRF** podem afetar APIs REST e como preveni-las com boas práticas de desenvolvimento.
 
-### 🔗 Repositório
+###  Repositório
 O projeto contém duas branches principais:
-- 🔓 `caue-api-vulneravel`: Implementação com falhas intencionais
-- 🛡️ `walter-api-invulneravel`: Implementação segura e protegida
+-  `caue-api-vulneravel`: Implementação com falhas intencionais
+-  `walter-api-invulneravel`: Implementação segura e protegida
 
-### 🎯 Contexto
+###  Contexto
 O projeto visa simular ambientes reais onde falhas de segurança são exploradas por atacantes. A proposta é evidenciar os riscos práticos e como medidas simples de segurança já reduzem drasticamente as ameaças.
 
-### ✅ Resultados Esperados
+###  Resultados Esperados
 - Entendimento aprofundado das vulnerabilidades: **SQL Injection**, **XSS**, **CSRF**
 - Aplicação de contramedidas práticas: **validação**, **sanitização**, **tokens de segurança**
 - Estímulo à cultura de desenvolvimento seguro desde as fases iniciais de um projeto
 
-### 👥 Público-Alvo
+###  Público-Alvo
 Estudantes de Engenharia de Software, profissionais iniciantes em back-end, e equipes interessadas em segurança de APIs web.
 
 ---
 
-## ⚙️ Relatório Técnico
+##  Relatório Técnico
 
-### 1. 📥 Introdução
+### 1.  Introdução
 Este repositório serve como material didático para comparação entre práticas inseguras e seguras na construção de APIs REST. As vulnerabilidades analisadas representam falhas comuns em APIs reais.
 
 ---
 
-### 2. 🗂️ Estrutura do Repositório
+### 2.  Estrutura do Repositório
 
 - **`caue-api-vulneravel`**: Contém falhas intencionais para simular ataques reais.
 - **`walter-api-invulneravel`**: Contém boas práticas de segurança com foco em SQL Injection, XSS e CSRF.
 
 ---
 
-### 3. 🛠️ Tecnologias Utilizadas
+### 3.  Tecnologias Utilizadas
 
 - **Backend:** Node.js + Express  
 - **Banco de Dados:** MySQL  
@@ -95,7 +95,7 @@ Este repositório serve como material didático para comparação entre prática
 
 ---
 
-### 4. 🚨 Vulnerabilidades na API Insegura
+### 4.  Vulnerabilidades na API Insegura
 
 | Tipo de Vulnerabilidade | Descrição |
 |-------------------------|-----------|
@@ -105,7 +105,7 @@ Este repositório serve como material didático para comparação entre prática
 
 ---
 
-### 5. 🛡️ Medidas de Segurança na API Protegida
+### 5.  Medidas de Segurança na API Protegida
 
 | Prática de Segurança | Implementação |
 |----------------------|---------------|
@@ -116,7 +116,7 @@ Este repositório serve como material didático para comparação entre prática
 
 ---
 
-### 6. 🧠 Conclusão
+### 6.  Conclusão
 A comparação entre versões inseguras e seguras permitiu identificar vulnerabilidades comuns e entender como elas podem ser evitadas com práticas recomendadas. A versão segura demonstra que segurança **não é luxo, é padrão mínimo de qualidade** em qualquer aplicação moderna.
 
 ---
